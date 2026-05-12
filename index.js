@@ -346,15 +346,18 @@ export function patchSendMessage(client) {
 
 function hasMainSession() {
   const credsPath = path.join(global.sessionName, 'creds.json')
-  if (!fs.existsSync(credsPath)) return false
+  if (!fs.existsSync(credsPath)) {
+    console.log(chalk.red('[ DEBUG ] No existe creds.json en: ' + credsPath))
+    return false
+  }
   try {
     const creds = JSON.parse(fs.readFileSync(credsPath))
-    return !!(creds.registered && creds.me?.id)
+    console.log(chalk.yellow('[ DEBUG ] registered:', creds.registered, '| me:', creds.me?.id))
+    return creds.registered === true
   } catch {
     return false
   }
 }
-
 function clockString(ms) {
   const d = isNaN(ms) ? '--' : Math.floor(ms / 86400000)
   const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24
