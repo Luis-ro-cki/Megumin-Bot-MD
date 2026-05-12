@@ -346,18 +346,15 @@ export function patchSendMessage(client) {
 
 function hasMainSession() {
   const credsPath = path.join(global.sessionName, 'creds.json')
-  if (!fs.existsSync(credsPath)) {
-    console.log(chalk.red('[ DEBUG ] No existe creds.json en: ' + credsPath))
-    return false
-  }
+  if (!fs.existsSync(credsPath)) return false
   try {
     const creds = JSON.parse(fs.readFileSync(credsPath))
-    console.log(chalk.yellow('[ DEBUG ] registered:', creds.registered, '| me:', creds.me?.id))
-    return creds.registered === true
+    return !!(creds.registered && creds.me?.id)
   } catch {
     return false
   }
 }
+
 function clockString(ms) {
   const d = isNaN(ms) ? '--' : Math.floor(ms / 86400000)
   const h = isNaN(ms) ? '--' : Math.floor(ms / 3600000) % 24
@@ -368,6 +365,15 @@ function clockString(ms) {
 
 ;(async () => {
   global.loadDatabase()
+  const credsPath = path.join(global.sessionName, 'creds.json')
+  const existe = fs.existsSync(credsPath)
+  process.stderr.write(`\n[DEBUG] sessionName: ${global.sessionName}\n`)
+  process.stderr.write(`[DEBUG] credsPath: ${credsPath}\n`)
+  process.stderr.write(`[DEBUG] existe: ${existe}\n`)
+  if (existe) {
+    const creds = JSON.parse(fs.readFileSync(credsPath, 'utf-8'))
+    process.stderr.write(`[DEBUG] registered: ${creds.registered}\n\n`)
+  }
   console.log(chalk.gray('[ ✿  ]  Base de datos cargada correctamente.'))
 
   const hasSession = hasMainSession()
