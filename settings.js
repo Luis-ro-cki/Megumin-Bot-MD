@@ -1,7 +1,7 @@
 import fs from 'fs';
 import chalk from 'chalk';
 
-global.owner = ['5351524614', '584147226479', '5492916450307', '5218711426787']
+global.owner = ['50578391933', '', '', '']
 global.sessionName = 'Sessions/Owner'
 global.version = '^3.0.0'
 global.pairing_code = true
@@ -20,11 +20,11 @@ global.bot = {
 global.prefa = '/'
 
 global.mods = [
-  '5492916450307', // Tu
-  '5351524614', // Yo
-  '584147226479',// El
-  '5218711426787'// when :v but :'v
+  '50578391933', // Tu
+  '', // Yo
+  '',// El
+  ''// when :v but :'v
 ]
 
 global.msgglobal = 'Hubo un error use el comando /reporte <problema> para avisarle a nuestros desarrolladores.'
-globalThis.dev = '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ Ɗі᥈ოᥝᥰძ ❨◣_◢❩凸︎'
+globalThis.dev = '© ⍴᥆ᥕᥱrᥱძ ᑲᥡ Luis González❨◣_◢❩凸︎'
